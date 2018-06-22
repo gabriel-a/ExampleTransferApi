@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ExampleTransferApi.Models;
 
 namespace ExampleTransferApi.DataInit
@@ -8,31 +9,24 @@ namespace ExampleTransferApi.DataInit
     {
         public static IEnumerable<TransferItem> GetData()
         {
-            var listToInsert = new List<TransferItem>();
-            for (var i = 1; i <= 50; i++)
+            return Enumerable.Range(1, 100).Select(i => new TransferItem()
             {
-                listToInsert.Add(new TransferItem()
-                {
-                    OriginalBlock = $"{GetRandomIpAddress()}/1{i}",
-                    TransferredBlocks = GetTransferBlocks(i),
-                    Date = DateTime.Now,
-                    From = $"From Company {i}",
-                    To = $"To Company {i}",
-                    TransferType = GetTransferType(i)
-                });
-            }
-
-            return listToInsert;
+                IpBlock = $"{GetRandomIpAddress()}/1{i}",
+                Date = DateTime.Now,
+                From = $"From Company {i}",
+                To = $"To Company {i}",
+                TransferType = GetTransferType(i)
+            });
+        }
+        
+        public static string GetListOfIps(int i)
+        {
+            return i % 2 == 0 ? $"{GetRandomIpAddress()}/2{i}" : $"{GetRandomIpAddress()}/4{i}";
         }
         
         private static TransferType GetTransferType(int i)
         {
             return i % 2 == 0 ? TransferType.Policy : TransferType.MergerOrAcquisition;
-        }
-
-        private static string GetTransferBlocks(int i)
-        {
-            return i % 2 == 0 ? $"{GetRandomIpAddress()}/2{i}, {GetRandomIpAddress()}/3{i}" : $"{GetRandomIpAddress()}/4{i}";
         }
         
         private static string GetRandomIpAddress()

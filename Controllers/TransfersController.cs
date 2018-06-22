@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using ExampleTransferApi.DataInit;
 using ExampleTransferApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -65,9 +62,8 @@ namespace ExampleTransferApi.Controllers
 
             transfer.Date = transferItem.Date;
             transfer.From = transferItem.From;
-            transfer.OriginalBlock = transferItem.OriginalBlock;
+            transfer.IpBlock = transferItem.IpBlock;
             transfer.To = transferItem.To;
-            transfer.TransferredBlocks = transferItem.TransferredBlocks;
             transfer.TransferType = transferItem.TransferType;
 
             _context.TransferItems.Update(transfer);

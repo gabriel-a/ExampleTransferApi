@@ -10,9 +10,7 @@ namespace ExampleTransferApi.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string OriginalBlock { get; set; }
-        [Required]
-        public string TransferredBlocks { get; set; }
+        public string IpBlock { get; set; }
         [Required]
         public string From { get; set; }
         [Required]
