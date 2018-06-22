@@ -26,9 +26,9 @@ namespace ExampleTransferApi.Controllers
 
         // GET api/transfers
         [HttpGet]
-        public ActionResult<TransfersWrapper> Get()
+        public IEnumerable<TransferItem> Get()
         {
-            return new TransfersWrapper(_context.TransferItems.ToList());
+            return _context.TransferItems.ToList();
         }
 
         // GET api/transfers/5

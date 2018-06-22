@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace ExampleTransferApi.Models
 {
@@ -25,15 +21,5 @@ namespace ExampleTransferApi.Models
         public DateTime Date { get; set; }
         [Required]
         public TransferType TransferType { get; set; }
-    }
-
-    public class TransfersWrapper
-    {
-        public List<TransferItem> Transfers { get; set; }
-
-        public TransfersWrapper(List<TransferItem> transfers)
-        {
-            Transfers = transfers;
-        }
     }
 }

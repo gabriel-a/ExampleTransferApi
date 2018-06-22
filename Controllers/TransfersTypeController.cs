@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using ExampleTransferApi.Models;
@@ -12,11 +13,9 @@ namespace ExampleTransferApi.Controllers
     {
         // GET api/transfertypes
         [HttpGet]
-        public ActionResult<dynamic> Get()
+        public IEnumerable<TransferType> Get()
         {
-            dynamic wrapper = new ExpandoObject();
-            wrapper.transferTypes = Enum.GetValues(typeof(TransferType)).Cast<TransferType>();;
-            return wrapper;
+            return Enum.GetValues(typeof(TransferType)).Cast<TransferType>();
         }
     }
 }
