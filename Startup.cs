@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ExampleTransferApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,13 +46,13 @@ namespace ExampleTransferApi
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
+//            else
+//            {
+//                app.UseHsts();
+//            }
             
             
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(c =>
@@ -80,6 +81,10 @@ namespace ExampleTransferApi
             app.UseCors(
                 options => options.WithOrigins("*").AllowAnyMethod()
             );
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             app.UseMvc();
         }
     }
