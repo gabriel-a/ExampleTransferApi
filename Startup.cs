@@ -29,13 +29,13 @@ namespace ExampleTransferApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TransferContext>(opt => opt.UseInMemoryDatabase("TransferList"));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+            services.AddCors();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +51,7 @@ namespace ExampleTransferApi
             }
             
             
-            //Dont redirect to HTTPS 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(c =>
@@ -77,6 +76,10 @@ namespace ExampleTransferApi
             
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            // Enable Cors
+            app.UseCors(
+                options => options.WithOrigins("*").AllowAnyMethod()
+            );
             app.UseMvc();
         }
     }
